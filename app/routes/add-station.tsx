@@ -1,3 +1,7 @@
 export default function AddStation() {
-  return <></>;
+  return (
+    <>
+      <p>add</p>
+    </>
+  );
 }

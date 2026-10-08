@@ -1,3 +1,7 @@
 export default function StationDetails() {
-  return <></>;
+  return (
+    <>
+      <p>details</p>
+    </>
+  );
 }
