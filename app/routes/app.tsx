@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 
+function readStationIds(): string[] {
+  const valueString = localStorage.getItem("stationIds");
+  if (!valueString) {
+    return [];
+  }
+  return JSON.parse(valueString) as string[];
+}
+
 export default function App() {
-  const [stationIds, setStationIds] = useState<string[]>([]);
+  const [stationIds, setStationIds] = useState<string[]>(() =>
+    typeof window === "undefined" ? [] : readStationIds(),
+  );
+  useEffect(() => {
+    localStorage.setItem("stationIds", JSON.stringify(stationIds));
+  }, [stationIds]);
 
   return (
     <div className="flex w-full items-center justify-center p-10 lg:p-20">
