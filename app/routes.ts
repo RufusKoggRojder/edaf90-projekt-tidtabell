@@ -9,7 +9,8 @@ export default [
   layout("./routes/app.tsx", [
     index("./routes/station-overview.tsx"),
     route("add", "./routes/add-station.tsx"),
-    route("station/:stationId", "./routes/station-details.tsx"),
+    route("details/:stationId", "./routes/station-details.tsx"),
+    route("/settings", "./routes/settings.tsx"),
     route("*", "./routes/not-found.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Search,
-  Plus,
-  Minus,
-  TrainFront,
-  BusFront,
-  TramFront,
-  SquareM,
-  CarTaxiFront,
-} from "lucide-react";
+import { Search, Plus, Minus } from "lucide-react";
 import { Button } from "~/components/ui/button.js";
 import { Field } from "~/components/ui/field.js";
 import {
@@ -34,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card.js";
+import { transportModeIcons } from "~/lib/shared.js";
 
 type SearchResult = {
   timestamp: string;
@@ -197,11 +189,3 @@ function StopItem({ stop, onClick, children, reverse }: StopItemType) {
     </Item>
   );
 }
-
-const transportModeIcons: Record<string, React.ReactNode> = {
-  TRAIN: <TrainFront />,
-  BUS: <BusFront />,
-  TRAM: <TramFront />,
-  METRO: <SquareM />,
-  TAXI: <CarTaxiFront />,
-};

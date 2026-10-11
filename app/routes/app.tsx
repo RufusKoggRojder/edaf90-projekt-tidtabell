@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
+import { Button } from "~/components/ui/button";
 
 export type Area = {
   id: string;
@@ -22,6 +23,14 @@ function readStops(): Area[] {
   return JSON.parse(valueString) as Area[];
 }
 
+function readApiKey(): string {
+  const valueString = localStorage.getItem("apiKey");
+  if (!valueString) {
+    return "";
+  }
+  return JSON.parse(valueString);
+}
+
 export default function App() {
   const [selectedStops, setSelectedStops] = useState<Area[]>(() =>
     typeof window === "undefined" ? [] : readStops(),
@@ -30,16 +39,32 @@ export default function App() {
     localStorage.setItem("stops", JSON.stringify(selectedStops));
   }, [selectedStops]);
 
-  const apiKey = "3abcec8b068c4ccea3b9ea631039c1eb";
+  const [apiKey, setApiKey] = useState(() =>
+    typeof window === "undefined" ? "" : readApiKey(),
+  );
+
+  useEffect(() => {
+    localStorage.setItem("apiKey", JSON.stringify(apiKey));
+  }, [apiKey]);
 
   return (
     <div className="flex w-full items-center justify-center p-10 lg:p-20">
       <div className="grid w-full grid-rows-1 gap-4 lg:w-3/4">
-        <h1 className="text-center text-3xl font-bold">Tågstationer</h1>
-        <Link to="/add">Lägg till station</Link>
+        <h1 className="text-center text-3xl font-bold">
+          <Link to="/">Tågstationer</Link>
+        </h1>
+        <div className="flex flex-row justify-between">
+          <Link to="/add">
+            <Button variant="link">Lägg till station</Button>
+          </Link>
+          <Link to="/settings">
+            <Button variant="link">Inställningar</Button>
+          </Link>
+        </div>
         <Outlet
           context={{
             apiKey,
+            setApiKey,
             selectedStops,
             setSelectedStops,
           }}

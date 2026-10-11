@@ -1,6 +1,7 @@
 interface DeparturesResponse {
   timestamp: string;
   departures: TimetableEntry[];
+  stops: Stop[];
 }
 
 interface TimetableEntry {
