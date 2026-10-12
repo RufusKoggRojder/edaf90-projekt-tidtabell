@@ -1,3 +1,4 @@
+import { transportModeIcons } from "~/lib/shared.js";
 import { TableCell, TableRow } from "./ui/table";
 
 export default function DepartureRow({
@@ -17,8 +18,9 @@ export default function DepartureRow({
   }
   return (
     <TableRow>
+      <TableCell>{transportModeIcons[d.route.transport_mode]}</TableCell>
       <TableCell>
-        <h2 className="text-lg font-bold">{d.route.designation}</h2>
+        <h2 className="text-lg font-bold flex">{d.route.designation}</h2>
       </TableCell>
       <TableCell>
         <span>{d.route.destination.name}</span>

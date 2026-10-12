@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from "~/components/ui/card.js";
 import ApiValidator from "~/components/ApiValidator.js";
+import { transportModeIcons } from "~/lib/shared.js";
 
 export default function StationDetails({
   params,
@@ -44,6 +45,7 @@ export default function StationDetails({
       }
       return (
         <TableRow>
+          <TableCell>{transportModeIcons[d.route.transport_mode]}</TableCell>
           <TableCell>
             <h2 className="text-lg font-bold">{d.route.designation}</h2>
           </TableCell>
