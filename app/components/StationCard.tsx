@@ -18,7 +18,7 @@ export default function StationCard({ station }: { station: Area }) {
 
   return (
     <Link to={`/details/${station.id}`}>
-      <Card className="p-4 shadow-lg bg-green-100 opacity-80 transition-all hover:-translate-y-2">
+      <Card className="p-4 shadow-l opacity-80 transition-all hover:-translate-y-2">
         <h1 className="text-lg font-bold">{station.name}</h1>
         <Table>{departuresList}</Table>
       </Card>

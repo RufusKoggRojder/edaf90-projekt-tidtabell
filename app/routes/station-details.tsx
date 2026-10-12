@@ -1,9 +1,21 @@
-import { Link, useOutletContext } from "react-router";
+import {
+  Link,
+  useOutletContext,
+  useParams,
+  useSearchParams,
+} from "react-router";
 import { useFetchStation } from "~/lib/use-fetch-station";
 import { Table, TableCell, TableRow } from "../components/ui/table";
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import { Spinner } from "~/components/ui/spinner";
 import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card.js";
+import ApiValidator from "~/components/ApiValidator.js";
 
 export default function StationDetails({
   params,
@@ -41,7 +53,8 @@ export default function StationDetails({
             <span className="font-medium">till {d.route.destination.name}</span>
           </TableCell>
           <TableCell>
-            avgår {d.realtime.split("T")[1].substring(0, 5)} {lateString}
+            avgår {d.realtime.split("T")[1].substring(0, 5)}{" "}
+            <span className="text-destructive">{lateString}</span>
             <br />
             om {toDep.getMinutes()} min
           </TableCell>
@@ -49,8 +62,12 @@ export default function StationDetails({
       );
     });
 
-  let position =
-    response?.stops?.[0]?.lat && response?.stops?.[0]?.lon
+  const [searchParams] = useSearchParams();
+  const returnTo = "/" + (searchParams.get("returnTo") || "");
+
+  const position: [number, number] | null =
+    response?.stops?.[0]?.lat !== undefined &&
+    response?.stops?.[0]?.lon !== undefined
       ? [response.stops[0].lat, response.stops[0].lon]
       : null;
 
@@ -72,17 +89,23 @@ export default function StationDetails({
   );
 
   return (
-    <>
-      <Link to="/">
-        <Button variant="outline">Tillbaka</Button>
-      </Link>
-      <div className="shadow-lg p-4 bg-amber-100 opacity-80 rounded-xl">
-        <h1 className="text-lg font-bold">{response?.stops[0].name}</h1>
-        <div className="grid grid-cols-2">
+    <ApiValidator>
+      <Card>
+        <CardHeader>
+          <div className="grid grid-cols-3">
+            <Link to={returnTo}>
+              <Button variant="outline">Tillbaka</Button>
+            </Link>
+            <CardTitle className="text-2xl text-center">
+              {response?.stops[0].name}
+            </CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="grid grid-cols-2">
           <Table>{departuresList}</Table>
           {map}
-        </div>
-      </div>
-    </>
+        </CardContent>
+      </Card>
+    </ApiValidator>
   );
 }

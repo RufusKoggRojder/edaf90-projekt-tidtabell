@@ -1,6 +1,11 @@
-import { useOutletContext } from "react-router";
+import { Link, useOutletContext } from "react-router";
 import StationCard from "~/components/StationCard";
 import type { Area } from "./app";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert.js";
+import { AlertCircleIcon } from "lucide-react";
+import { testAPI } from "~/lib/utils.js";
+import { useEffect, useMemo, useState } from "react";
+import ApiValidator from "~/components/ApiValidator.js";
 //740040327
 //740016755
 //740000120
@@ -10,20 +15,30 @@ export default function StationOverview() {
   }>();
 
   const { apiKey } = useOutletContext<{ apiKey: string }>();
+  const [apiKeyValid, setApiKeyValid] = useState(true);
+
+  useMemo(async () => {
+    setApiKeyValid(await testAPI(apiKey));
+  }, [apiKey]);
 
   let stationCards = selectedStops.map((s) => <StationCard station={s} />);
 
-  if (apiKey == "") {
+  if (!apiKeyValid) {
     return (
-      <div className="bg-red-500 text-white p-4 shadow-lg rounded-xl">
-        <h2 className="text-lg font-bold">Saknar API-nyckel!</h2>
-        <p>
-          Du behöver en API-nyckel för att kunna använda sidan. Gå till
-          inställningar för att lägga till en.
-        </p>
-      </div>
+      <Alert variant="destructive" className="max-w-md">
+        <AlertCircleIcon />
+        <AlertTitle>Saknad eller felaktig API-nyckel!</AlertTitle>
+        <AlertDescription>
+          Du behöver en API-nyckel för att kunna använda sidan. Gå till&nbsp;
+          <Link to="/settings">inställningar</Link> för att lägga till en.
+        </AlertDescription>
+      </Alert>
     );
   }
 
-  return <div className="grid grid-cols-2 *:mb-4 gap-4">{stationCards}</div>;
+  return (
+    <ApiValidator>
+      <div className="grid grid-cols-2 *:mb-4 gap-4">{stationCards}</div>
+    </ApiValidator>
+  );
 }

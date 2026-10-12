@@ -4,6 +4,7 @@ import {
   TramFront,
   SquareM,
   CarTaxiFront,
+  Ship,
 } from "lucide-react";
 
 export const transportModeIcons: Record<string, React.ReactNode> = {
@@ -12,4 +13,5 @@ export const transportModeIcons: Record<string, React.ReactNode> = {
   TRAM: <TramFront />,
   METRO: <SquareM />,
   TAXI: <CarTaxiFront />,
+  BOAT: <Ship />,
 };

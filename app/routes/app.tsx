@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
-import { Button } from "~/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "~/components/ui/navigation-menu.js";
 
 export type Area = {
   id: string;
@@ -53,14 +58,23 @@ export default function App() {
         <h1 className="text-center text-3xl font-bold">
           <Link to="/">Tågstationer</Link>
         </h1>
-        <div className="flex flex-row justify-between">
-          <Link to="/add">
-            <Button variant="link">Lägg till station</Button>
-          </Link>
-          <Link to="/settings">
-            <Button variant="link">Inställningar</Button>
-          </Link>
-        </div>
+        <NavigationMenu className="flex flex-row justify-between">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuLink render={<Link to="/">Överblick</Link>} />
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                render={<Link to="/add">Hantera stationer</Link>}
+              />
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                render={<Link to="/settings">Inställningar</Link>}
+              />
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
         <Outlet
           context={{
             apiKey,

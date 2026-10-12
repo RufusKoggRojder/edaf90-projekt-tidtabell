@@ -17,7 +17,7 @@ import {
 } from "~/components/ui/item.js";
 import { cn, safeFetchJson } from "~/lib/utils.js";
 import { Link, useOutletContext } from "react-router";
-import { type Area, type Stop } from "./app.js";
+import { type Area } from "./app.js";
 import type { BaseUIEvent } from "@base-ui/react";
 import {
   Card,
@@ -26,6 +26,7 @@ import {
   CardTitle,
 } from "~/components/ui/card.js";
 import { transportModeIcons } from "~/lib/shared.js";
+import ApiValidator from "~/components/ApiValidator.js";
 
 type SearchResult = {
   timestamp: string;
@@ -77,7 +78,7 @@ export default function AddStation() {
     }
   }
   return (
-    <div>
+    <ApiValidator>
       <h2 className="text-3xl p-6 text-center">Hantera hållplatser</h2>
       <div className="grid grid-cols-2 gap-4">
         <Card className="flex flex-col gap-4 h-fit">
@@ -148,7 +149,7 @@ export default function AddStation() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </ApiValidator>
   );
 }
 
@@ -166,7 +167,7 @@ function StopItem({ stop, onClick, children, reverse }: StopItemType) {
       <ItemContent className={cn("", reverse && "order-2")}>
         <Link
           className="flex flex-row justify-between items-center"
-          to={`/details/${stop.id}`}
+          to={`/details/${stop.id}?returnTo=add`}
         >
           <span className="font-bold">{stop.name}</span>
           <div className="flex flex-row p-1 gap-1">

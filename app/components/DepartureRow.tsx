@@ -24,7 +24,8 @@ export default function DepartureRow({
         <span>{d.route.destination.name}</span>
       </TableCell>
       <TableCell>
-        avgår {d.realtime.split("T")[1].substring(0, 5)} {lateString}
+        avgår {d.realtime.split("T")[1].substring(0, 5)}{" "}
+        <span className="text-destructive">{lateString}</span>
         <br />
         om {toDeparture.getMinutes()} min
       </TableCell>
