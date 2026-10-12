@@ -197,7 +197,14 @@ export default function ManageStations() {
                 <Button variant="default" type="submit">
                   Spara
                 </Button>
-                <Button variant="destructive" type="reset">
+                <Button
+                  variant="destructive"
+                  type="reset"
+                  onClick={() => {
+                    setAddedStops([]);
+                    setRemovedStops([]);
+                  }}
+                >
                   Avbryt
                 </Button>
               </Field>
