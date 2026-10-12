@@ -290,7 +290,7 @@ function StopItem({ stop, onClick, children, variant, reverse }: StopItemType) {
             "flex flex-row justify-between items-center",
             variantStyling,
           )}
-          to={`/details/${stop.id}?returnTo=add`}
+          to={`/details/${stop.id}?returnTo=manage`}
         >
           <span className="font-bold">{stop.name}</span>
           <div className="flex flex-row p-1 gap-1">
