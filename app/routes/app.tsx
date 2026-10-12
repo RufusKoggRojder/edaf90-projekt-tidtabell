@@ -65,7 +65,7 @@ export default function App() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink
-                render={<Link to="/add">Hantera stationer</Link>}
+                render={<Link to="/manage">Hantera stationer</Link>}
               />
             </NavigationMenuItem>
             <NavigationMenuItem>
