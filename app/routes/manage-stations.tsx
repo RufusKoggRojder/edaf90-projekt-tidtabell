@@ -120,7 +120,6 @@ export default function ManageStations() {
   }
   return (
     <ApiValidator>
-      <h2 className="text-3xl p-6 text-center">Hantera hållplatser</h2>
       <div className="grid grid-cols-2 gap-4">
         <Card className="flex flex-col gap-4 h-fit">
           <CardHeader>

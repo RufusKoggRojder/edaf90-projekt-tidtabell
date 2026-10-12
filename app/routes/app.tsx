@@ -56,7 +56,7 @@ export default function App() {
     <div className="flex w-full items-center justify-center p-10 lg:p-20">
       <div className="grid w-full grid-rows-1 gap-4 lg:w-3/4">
         <h1 className="text-center text-3xl font-bold">
-          <Link to="/">Tågstationer</Link>
+          <Link to="/">Avgångar i Sverige</Link>
         </h1>
         <NavigationMenu className="flex flex-row justify-between">
           <NavigationMenuList>
