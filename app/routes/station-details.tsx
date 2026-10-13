@@ -1,12 +1,7 @@
-import {
-  Link,
-  useOutletContext,
-  useParams,
-  useSearchParams,
-} from "react-router";
+import { Link, useOutletContext, useSearchParams } from "react-router";
 import { useFetchStation } from "~/lib/use-fetch-station";
 import { Table, TableCell, TableRow } from "../components/ui/table";
-import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { Spinner } from "~/components/ui/spinner";
 import { Button } from "~/components/ui/button";
 import {

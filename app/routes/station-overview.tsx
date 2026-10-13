@@ -4,11 +4,9 @@ import type { Area } from "./app";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert.js";
 import { AlertCircleIcon } from "lucide-react";
 import { testAPI } from "~/lib/utils.js";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ApiValidator from "~/components/ApiValidator.js";
-//740040327
-//740016755
-//740000120
+
 export default function StationOverview() {
   const { selectedStops } = useOutletContext<{
     selectedStops: Area[];

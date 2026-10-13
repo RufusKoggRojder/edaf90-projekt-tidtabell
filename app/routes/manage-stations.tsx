@@ -7,16 +7,9 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "~/components/ui/input-group.js";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemMedia,
-  ItemTitle,
-} from "~/components/ui/item.js";
+import { Item, ItemActions, ItemContent } from "~/components/ui/item.js";
 import { cn, safeFetchJson } from "~/lib/utils.js";
-import { Link, useNavigate, useOutletContext } from "react-router";
+import { Link, useOutletContext } from "react-router";
 import { type Area } from "./app.js";
 import type { BaseUIEvent } from "@base-ui/react";
 import {
