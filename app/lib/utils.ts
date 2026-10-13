@@ -1,4 +1,5 @@
 export { cn } from "cn";
+import { useEffect, useRef } from "react";
 
 export async function safeFetchJson<T>(url: string | URL, init?: RequestInit) {
   return fetch(url, init).then((response) => {
@@ -16,3 +17,21 @@ export async function testAPI(apiKey: string): Promise<boolean> {
     `https://realtime-api.trafiklab.se/v1/departures/740000120?key=${apiKey}`,
   ).then((response) => response.ok);
 }
+
+export const useInterval = (callback: () => void, delay: number) => {
+  const savedCallback = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { safeFetchJson } from "./utils";
+import { safeFetchJson, useInterval } from "./utils";
 
 function fetchStation(
   station: string,
@@ -13,7 +13,8 @@ function fetchStation(
 
 function useFetchStation(station: string, API_KEY: string) {
   const [data, setData] = useState<DeparturesResponse | undefined>(undefined);
-  useEffect(() => {
+
+  const safeFetch = () => {
     let ignore = false;
     fetchStation(station, API_KEY).then((d) => {
       if (!ignore) {
@@ -23,7 +24,9 @@ function useFetchStation(station: string, API_KEY: string) {
     return () => {
       ignore = true;
     };
-  }, [station]);
+  };
+  useEffect(safeFetch, [station]);
+  useInterval(safeFetch, 30 * 1000);
   return data;
 }
 
