@@ -29,9 +29,12 @@ export default function StationDetails({
   let departuresList = departues
     ?.sort((e1, e2) => Date.parse(e1.realtime) - Date.parse(e2.realtime))
     .map((d) => {
-      let currentTime = new Date();
-      let toDep = new Date(Date.parse(d.realtime) - currentTime.getTime());
-      let late = new Date(Date.parse(d.realtime) - Date.parse(d.scheduled));
+      1;
+      const currentTime = new Date();
+      const toDeparture = new Date(
+        Math.max(Date.parse(d.realtime) - currentTime.getTime(), 0),
+      );
+      const late = new Date(Date.parse(d.realtime) - Date.parse(d.scheduled));
       let lateString = "";
       if (late.getTime() > 60000) {
         lateString = "(" + late.getMinutes() + " min försenad)";
@@ -53,7 +56,9 @@ export default function StationDetails({
             avgår {d.realtime.split("T")[1].substring(0, 5)}{" "}
             <span className="text-destructive">{lateString}</span>
             <br />
-            om {toDep.getMinutes()} min
+            {toDeparture.getMinutes() != 0
+              ? `om ${toDeparture.getMinutes()} min`
+              : "nu"}
           </TableCell>
         </TableRow>
       );

@@ -6,10 +6,13 @@ export default function DepartureRow({
 }: {
   departure: TimetableEntry;
 }) {
-  let d = departure;
-  let currentTime = new Date();
-  let toDeparture = new Date(Date.parse(d.realtime) - currentTime.getTime());
-  let late = new Date(Date.parse(d.realtime) - Date.parse(d.scheduled));
+  const d = departure;
+  const currentTime = new Date();
+  const toDeparture = new Date(
+    Math.max(Date.parse(d.realtime) - currentTime.getTime(), 0),
+  );
+
+  const late = new Date(Date.parse(d.realtime) - Date.parse(d.scheduled));
   let lateString = "";
   if (late.getTime() > 60000) {
     lateString = "(" + late.getMinutes() + " min försenad)";
@@ -29,7 +32,9 @@ export default function DepartureRow({
         avgår {d.realtime.split("T")[1].substring(0, 5)}{" "}
         <span className="text-destructive">{lateString}</span>
         <br />
-        om {toDeparture.getMinutes()} min
+        {toDeparture.getMinutes() != 0
+          ? `om ${toDeparture.getMinutes()} min`
+          : "nu"}
       </TableCell>
     </TableRow>
   );
