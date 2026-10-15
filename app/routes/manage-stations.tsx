@@ -186,19 +186,23 @@ export default function ManageStations() {
           <CardFooter>
             <form onSubmit={handleSubmit}>
               <Field orientation="horizontal">
-                <Button variant="default" type="submit">
-                  Spara
-                </Button>
-                <Button
-                  variant="destructive"
-                  type="reset"
-                  onClick={() => {
-                    setAddedStops([]);
-                    setRemovedStops([]);
-                  }}
-                >
-                  Avbryt
-                </Button>
+                {(addedStops.length > 0 || removedStops.length > 0) && (
+                  <>
+                    <Button variant="default" type="submit">
+                      Spara
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      type="reset"
+                      onClick={() => {
+                        setAddedStops([]);
+                        setRemovedStops([]);
+                      }}
+                    >
+                      Avbryt
+                    </Button>
+                  </>
+                )}
               </Field>
             </form>
           </CardFooter>
